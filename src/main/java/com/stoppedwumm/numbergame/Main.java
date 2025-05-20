@@ -14,20 +14,31 @@ public class Main {
         boolean hasGuessedCorrectly = false;
         System.out.println("Welcome to my number guessing game");
         System.out.println("You'll have to guess a number between 1 and 100!");
-        while (true) { 
+        System.out.println("or if you wanna quit just type quit");
+        while (true) {
             String inp = InputReader.ReadInput("Input your guess:");
-            Integer inpNumber = Integer.parseInt(inp);
-            if (inpNumber > numberToGuess) {
-                System.out.println("Too big!");
-                numberOfTries++;
-            } else if (inpNumber < numberToGuess) {
-                System.err.println("Too small!");
-                numberOfTries++;
-            } else {
-                System.err.println("Correct number guessed!");
-                hasGuessedCorrectly = true;
-                numberOfTries++;
-                break;
+            if (inp.equals("quit")) {
+                System.out.println("Quit");
+                System.exit(0);
+            }
+            try {
+                Integer inpNumber = Integer.parseInt(inp);
+                if (inpNumber > numberToGuess && inpNumber > 0) {
+                    System.out.println("Too big!");
+                    numberOfTries++;
+                } else if (inpNumber < 0) {
+                    System.out.println("very funny");
+                } else if (inpNumber < numberToGuess) {
+                    System.err.println("Too small!");
+                    numberOfTries++;
+                } else {
+                    System.err.println("Correct number guessed!");
+                    hasGuessedCorrectly = true;
+                    numberOfTries++;
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Not a number");
             }
         }
         if (hasGuessedCorrectly) {
